@@ -6400,7 +6400,7 @@ footer{
     line-height: 1.7; max-width: 640px;
   }
 
-  /* HERO — the guarantee */
+  /* SSAR service hero */
   #page-offer .hero-guarantee{
     border-bottom: 1px solid var(--line);
     padding-top: 48px;
@@ -6408,42 +6408,35 @@ footer{
   }
   #page-offer .guarantee-grid{
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 80px;
-    align-items: end;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+    gap: clamp(32px, 5vw, 80px);
+    align-items: center;
     padding-bottom: 80px;
   }
-  #page-offer .hero-title{
-    font-family: var(--serif-cn);
-    font-weight: 400;
-    font-size: clamp(48px, 6vw, 80px);
-    line-height: 1.02;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin-bottom: 32px;
+  #page-offer .ssar-title{
+    font-size: clamp(44px, 5.2vw, 72px);
+    line-height: 1.12;
   }
-  #page-offer .hero-title em{
-    font-family: var(--serif-en);
-    font-style: italic; font-weight: 400;
-    color: var(--green-dark);
+  #page-offer .ssar-lead{ max-width: 480px; margin-bottom: 30px; }
+  #page-offer .ssar-tags{ display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 34px; }
+  #page-offer .ssar-tags span{
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 12px;
+    color: var(--ink-2);
+    font-size: 12px;
+    white-space: nowrap;
   }
-  #page-offer .hero-lead{
-    font-size: 18px; color: var(--ink-3);
-    line-height: 1.65; max-width: 520px;
-    margin-bottom: 40px;
-  }
-
-  /* Contract visual */
-  #page-offer .contract{
+  #page-offer .ssar-card{
     border: 1px solid var(--ink);
     background: #fff;
-    padding: 36px 36px 32px;
+    padding: 26px 30px 20px;
     position: relative;
     border-radius: 4px;
     box-shadow: 16px 16px 0 0 var(--green-soft);
   }
-  #page-offer .contract::before{
-    content: "SERVICE · OVERVIEW";
+  #page-offer .ssar-card::before{
+    content: "SSAR · SERVICE FLOW";
     position: absolute;
     top: -10px; left: 24px;
     background: #fff;
@@ -6453,42 +6446,64 @@ footer{
     letter-spacing: 0.16em;
     color: var(--ink-4);
   }
-  #page-offer .contract-clause{
-    font-family: var(--serif-cn);
-    font-size: 17px;
-    line-height: 1.7;
-    color: var(--ink);
-    padding-bottom: 28px;
-    margin-bottom: 24px;
-    border-bottom: 1px dashed var(--line);
+  #page-offer .ssar-step{
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 16px;
+    padding: 19px 0;
+    border-bottom: 1px solid var(--line);
   }
-  #page-offer .contract-clause em{
-    background: linear-gradient(180deg, transparent 55%, var(--green-soft) 55%);
-    font-style: normal;
-    font-weight: 500;
-    padding: 0 2px;
-  }
-  #page-offer .contract-stamp{
-    display: flex; align-items: center; gap: 16px;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-3);
-    letter-spacing: 0.06em;
-  }
-  #page-offer .stamp-circle{
-    width: 60px; height: 60px;
-    border: 1.5px solid var(--green);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transform: rotate(-12deg);
-    color: var(--green-dark);
+  #page-offer .ssar-step:last-child{ border-bottom: 0; padding-bottom: 0; }
+  #page-offer .ssar-step-code{
     font-family: var(--serif-en);
+    font-size: 30px;
     font-style: italic;
+    color: var(--green-dark);
+    line-height: 1;
+  }
+  #page-offer .ssar-step-title{
+    font-family: var(--serif-cn);
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  #page-offer .ssar-step-title small{
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-4);
+    letter-spacing: .08em;
+    margin-left: 8px;
+  }
+  #page-offer .ssar-step-copy{
     font-size: 13px;
-    font-weight: 500;
-    line-height: 1.1;
-    text-align: center;
+    line-height: 1.55;
+    color: var(--ink-3);
+  }
+  #page-offer .ssar-path{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--green-dark);
+  }
+  #page-offer .ssar-path span{
+    border: 1px solid #c7dfcb;
+    background: #f4faf5;
+    border-radius: 3px;
+    padding: 5px 7px;
+    white-space: nowrap;
+  }
+  #page-offer .ssar-path b{ font-weight: 400; color: var(--ink-4); }
+  #page-offer .ssar-step-r .ssar-step-code{ color: var(--ink); }
+  #page-offer .ssar-step-r .ssar-step-title{ color: var(--green-dark); }
+  @media (max-width: 600px){
+    #page-offer .guarantee-grid{ padding-left: 20px !important; padding-right: 20px !important; gap: 32px; }
+    #page-offer .ssar-title{ font-size: clamp(40px, 10vw, 54px); }
+    #page-offer .ssar-card{ padding: 20px 18px 16px; box-shadow: 8px 8px 0 0 var(--green-soft); }
+    #page-offer .ssar-step{ grid-template-columns: 36px minmax(0, 1fr); gap: 10px; }
+    #page-offer .ssar-step-code{ font-size: 25px; }
   }
 
   /* SERVICE MAP — overview blueprint */
@@ -13872,7 +13887,7 @@ footer{
     #page-offer .sales-section{ padding: 56px 20px;}
     #page-offer .hero-guarantee{ padding-top: 28px;}
     #page-offer .guarantee-grid{ grid-template-columns: 1fr; gap: 48px; padding-bottom: 56px;}
-    #page-offer .contract{ box-shadow: 8px 8px 0 0 var(--green-soft);}
+    #page-offer .ssar-card{ box-shadow: 8px 8px 0 0 var(--green-soft);}
     #page-offer .service-map{ padding: 56px 20px 0;}
     #page-offer .blueprint{ box-shadow: 8px 8px 0 0 var(--green-soft);}
     #page-offer .bp-pillars{ grid-template-columns: 1fr; }
@@ -13928,35 +13943,48 @@ footer{
 
 <main class="page" id="page-offer">
 
-  <!-- ============ 1. THE PROMISE ============ -->
+  <!-- ============ 1. SSAR SERVICE ============ -->
   <section class="hero-guarantee">
     <div class="guarantee-grid" style="max-width:1280px; margin:0 auto; padding-left:40px; padding-right:40px;">
       <div>
-        <div class="eyebrow"><span class="dot"></span>Diamond · 钻石计划</div>
-        <h1 class="page-title">
-          求职全程<br>
-          <span class="accent">有人帮你推进.</span><br>
-          从投递到面试，步步跟进。
-          <span class="en">From applications to interviews, we move each step forward with you.</span>
+        <div class="eyebrow"><span class="dot"></span>SSAR · 钻石计划核心服务</div>
+        <h1 class="page-title ssar-title">
+          从合适岗位，<br>
+          <span class="accent">走向招聘团队.</span>
         </h1>
-        <p class="page-lead">
-          市面上大多数服务给你一份攻略，然后让你自己去投、自己去 networking、自己去准备。钻石计划不一样 —— 岗位我们帮你筛、简历我们帮你投、内推我们帮你要、面试我们陪你练。每一步都有人替你把活干完。
+        <p class="page-lead ssar-lead">
+          AI 找到更匹配的职位，团队及时投递，再持续联系对应岗位的 Hiring Team。
         </p>
+        <div class="ssar-tags" aria-label="SSAR 服务环节"><span>智能搜索</span><span>每日投递</span><span>持续触达</span></div>
         <div class="page-cta">
-          <a class="btn-primary" href="https://work.weixin.qq.com/ca/cawcde59d081df809d" target="_blank" rel="noopener">了解服务内容 <span class="arr">→</span></a>
+          <a class="btn-primary" href="#service-map">查看服务全貌 <span class="arr">→</span></a>
           <a class="btn-ghost" href="https://work.weixin.qq.com/ca/cawcde59d081df809d" target="_blank" rel="noopener">立即咨询</a>
         </div>
       </div>
 
-      <div class="contract">
-        <div class="contract-clause">
-          从筛岗位、投简历、要内推，到面试陪练与谈薪准备 —— <em>每一步都有对应的服务安排</em>，进度清晰可见。
-        </div>
-        <div class="contract-stamp">
-          <div class="stamp-circle">Done<br>for you</div>
+      <div class="ssar-card" aria-label="SSAR 服务三步流程">
+        <div class="ssar-step">
+          <div class="ssar-step-code">SS</div>
           <div>
-            <div style="color:var(--ink); font-family:var(--serif-cn); font-size:14px; font-weight:500; margin-bottom:2px;">全流程代做</div>
-            <div>DONE FOR YOU · NOT DIY</div>
+            <div class="ssar-step-title">智能搜索 <small>SMART SEARCH</small></div>
+            <div class="ssar-step-copy">背景 × 职能 × 地区，多轮搜索并筛读岗位描述，找到更匹配的机会。</div>
+          </div>
+        </div>
+        <div class="ssar-step">
+          <div class="ssar-step-code">A</div>
+          <div>
+            <div class="ssar-step-title">团队投递 <small>APPLICATION</small></div>
+            <div class="ssar-step-copy">服务期内每天投递；新发布岗位在 24 小时内完成申请。</div>
+          </div>
+        </div>
+        <div class="ssar-step ssar-step-r">
+          <div class="ssar-step-code">R</div>
+          <div>
+            <div class="ssar-step-title">智能内推 <small>REFERRAL</small></div>
+            <div class="ssar-step-copy">AI 通过你的 LinkedIn 账户，全天候联系并跟进对应岗位的招聘团队，争取内推机会。</div>
+            <div class="ssar-path" aria-label="从匹配岗位找到招聘团队，再沟通跟进并争取内推机会">
+              <span>匹配岗位</span><b aria-hidden="true">→</b><span>Hiring Team</span><b aria-hidden="true">→</b><span>沟通跟进</span><b aria-hidden="true">→</b><span>内推机会</span>
+            </div>
           </div>
         </div>
       </div>
@@ -13964,7 +13992,7 @@ footer{
   </section>
 
   <!-- ============ 2. SERVICE MAP — OVERVIEW ============ -->
-  <section class="service-map">
+  <section class="service-map" id="service-map">
     <div class="map-head">
       <div class="sales-num">— FULL SERVICE MAP</div>
       <h2>钻石计划里，<em>有哪些服务.</em></h2>
@@ -33386,6 +33414,82 @@ if(rmBackBtn) rmBackBtn.addEventListener('click', backToRoles);
   // ===========================================================
   // @data:articles:start
   const ARTICLES = [
+    {
+      slug: 'h-1b-eeoc-0xg6t',
+      category: 'H1B & 签证',
+      date: '2026.10.12',
+      readTime: '7 min read',
+      title: '一封邮件炸了！德州招聘公司「只要H-1B」被EEOC告上法庭',
+      dek: '德州IT招聘公司SibiTalent因一封注明「only H-1B」的邮件遭EEOC起诉，折射出留学生求职市场的真实灰色地带。',
+      image: { url: '/og/intel-h-1b-eeoc-0xg6t.jpg', alt: '一封邮件炸了！德州招聘公司「只要H-1B」被EEOC告上法庭' },
+      body: `
+        <p class="lede">2026年10月，美国平等就业机会委员会（EEOC）正式起诉德州IT招聘公司 SibiTalent，原因是其招聘邮件中用大号红色高亮字体标注「Only H-1B」，明确将美国公民排除在外。这一案件表明：雇主或中介以签证身份作为招聘筛选条件，在美国联邦法律下可构成国籍歧视，留学生在求职中需要理解这条法律红线的两面。</p>
+<p>---</p>
+<h2>关键要点</h2>
+<ul>
+  <li><strong>EEOC 于 2026 年对 SibiTalent 提起诉讼</strong>，案号 3:2026cv11106，法院为加州北区联邦地区法院。</li>
+  <li><strong>「Only H-1B」是明确的违法信号</strong>：EEOC 主席 Andrea Lucas 表示，以签证要求作为国籍歧视的替代手段，将被追责。</li>
+  <li><strong>歧视针对的是美国公民</strong>：本案中一名加州 Oakley 的美国公民求职者收到该邮件并提起申诉。</li>
+  <li><strong>IT 招聘行业长期存在签证身份偏好</strong>，此案是监管机构明确亮剑的信号。</li>
+  <li><strong>对 OPT/H-1B 持有者而言</strong>，了解哪些"偏好"合法、哪些越界，直接影响求职安全与权益保护。</li>
+</ul>
+<p>---</p>
+<h2>「Only H-1B」邮件案到底发生了什么？</h2>
+<p>根据 EEOC 诉状（来源：<em>US Equal Employment Opportunity Commission v. SibiTalent</em>，2026年10月），事件时间线如下：</p>
+<ul>
+  <li><strong>2025年7月</strong>：SibiTalent 招聘人员向加州 Oakley 一名工人发送邮件，涉及加州 Mountain View 一个商业数据分析师（Business Data Analyst）职位。</li>
+  <li>邮件顶部以<strong>大号黑色字体、红色高亮</strong>标注「Only H-1B」。</li>
+  <li>求职者询问这种措辞是否合法，招聘人员仅回复「yeah」，此后不再回应。</li>
+  <li>SibiTalent 最终推荐给客户的两名候选人均为<strong>印度和尼泊尔国籍</strong>。</li>
+  <li><strong>2026年10月5日</strong>：EEOC 正式提起诉讼。</li>
+</ul>
+<table style="border-collapse:collapse;width:100%;margin:0 0 22px;font-size:15px;line-height:1.6;"><thead><tr><th style="border:1px solid #e5e5e5;padding:8px 12px;text-align:left;background:#f7f7f5;font-weight:600;">事件节点</th><th style="border:1px solid #e5e5e5;padding:8px 12px;text-align:left;background:#f7f7f5;font-weight:600;">时间</th><th style="border:1px solid #e5e5e5;padding:8px 12px;text-align:left;background:#f7f7f5;font-weight:600;">内容</th></tr></thead><tbody><tr><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">招聘邮件发出</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">2025年7月</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">邮件注明「Only H-1B」，对象为美国公民</td></tr><tr><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">求职者申诉</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">2025年（具体日期未披露）</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">向 EEOC 投诉涉嫌歧视</td></tr><tr><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">EEOC 提起诉讼</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">2026年10月5日</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">加州北区联邦地区法院，案号 3:2026cv11106</td></tr><tr><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">被告公司</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">—</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">SibiTalent，总部 Plano，德州</td></tr><tr><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">客户雇主</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">—</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">诉状中未披露</td></tr></tbody></table>
+<p>SibiTalent 截至报道发出时未对媒体置评（来源：Staffing Industry Analysts，2026-10-05）。</p>
+<p>---</p>
+<h2>雇主可以要求 H-1B 身份吗？法律边界在哪里？</h2>
+<p>这是很多留学生在找工作时最困惑的问题。<strong>简单回答：不可以主动以签证身份作为筛选条件。</strong></p>
+<p>美国《1964年民权法案》第七章（Title VII of the Civil Rights Act of 1964）禁止基于<strong>国籍（national origin）</strong>的就业歧视。EEOC 的执法立场是：将签证类型作为招聘筛选器，在实践中几乎等同于以国籍作为标准，构成代理歧视（proxy discrimination）。</p>
+<p>EEOC 主席 Andrea Lucas 在官方声明中明确表示：</p>
+<blockquote>"Employers and employment agencies cannot shut qualified Americans out of job opportunities by using unjustified visa requirements as a proxy for national origin discrimination."（雇主和就业中介不能用不合理的签证要求，将符合资格的美国人排除在就业机会之外，以此作为国籍歧视的替代手段。）</blockquote>
+<p><strong>合法 vs. 违法的边界参考：</strong></p>
+<table style="border-collapse:collapse;width:100%;margin:0 0 22px;font-size:15px;line-height:1.6;"><thead><tr><th style="border:1px solid #e5e5e5;padding:8px 12px;text-align:left;background:#f7f7f5;font-weight:600;">操作</th><th style="border:1px solid #e5e5e5;padding:8px 12px;text-align:left;background:#f7f7f5;font-weight:600;">合法性</th><th style="border:1px solid #e5e5e5;padding:8px 12px;text-align:left;background:#f7f7f5;font-weight:600;">说明</th></tr></thead><tbody><tr><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">要求候选人在职前具备合法工作授权</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">✅ 合法</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">通用的 work authorization 要求</td></tr><tr><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">明确注明「Only H-1B」「No OPT」「No CPT」</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">❌ 违法风险极高</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">以签证类型代替国籍歧视</td></tr><tr><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">注明「不提供签证担保（No sponsorship）」</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">⚠️ 灰色地带</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">通常被法院允许，但需结合语境</td></tr><tr><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">优先推荐特定国籍候选人</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">❌ 违法</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">SibiTalent 案的核心指控之一</td></tr><tr><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">询问候选人工作授权到期时间</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">⚠️ 谨慎</td><td style="border:1px solid #e5e5e5;padding:8px 12px;vertical-align:top;">不应作为歧视依据</td></tr></tbody></table>
+<p>---</p>
+<h2>这个案子对 OPT/H-1B 留学生求职意味着什么？</h2>
+<p>本案的歧视受害方是美国公民，但它揭示的市场现象对 OPT 和 H-1B 持有者同样重要。</p>
+<p><strong>你可能遇到的两种相反情况：</strong></p>
+<p><strong>情况一：你持有 OPT，但招聘方只要 H-1B</strong> 这说明部分雇主在违规操作。你有权向 EEOC 投诉，尤其当招聘方用签证状态明确拒绝你、而你具备相应资格时。</p>
+<p><strong>情况二：你持有 H-1B，但求职市场「隐性偏好 H-1B」</strong> SibiTalent 案暴露了 IT 人力外包行业的惯常操作——优先推荐已有 H-1B 的候选人，因为客户无需支付签证担保成本。这对你短期有利，但长期依赖这类中介渠道风险极高：此类公司合规性存疑，可能随时面临法律问题影响你的雇主资质。</p>
+<p><strong>留学生求职的实操建议：</strong></p>
+<ul>
+  <li><strong>避开「Only H-1B」中介</strong>：此类公司合规风险高，一旦被起诉或关闭，你的签证状态可能受到牵连。</li>
+  <li><strong>优先选择有 sponsorship 记录的大型雇主</strong>：参考 USCIS 公开的 H-1B 雇主数据库，优先投递有历史记录的公司。</li>
+  <li><strong>收到歧视性邮件，保存截图</strong>：如果你是美国公民或绿卡持有者收到类似「Only H-1B」的邮件，可向 EEOC（eeoc.gov）在线提交投诉。</li>
+  <li><strong>内推 &gt; 中介</strong>：绕过第三方人力公司，通过校友网络、LinkedIn 直接触达 Hiring Manager，是规避签证偏见最有效的方式。</li>
+</ul>
+<p>---</p>
+<h2>常见问题</h2>
+<p><strong>招聘公司说「Only H-1B」是违法的吗？</strong> 根据 EEOC 的起诉立场，是的。以签证类型作为招聘筛选标准，在联邦法律下被认定为可能构成国籍歧视，本案（3:2026cv11106）即为典型。</p>
+<p><strong>我持有 OPT，雇主说「不提供 sponsorship」，这合法吗？</strong> 通常合法。「不提供签证担保」与「只要特定签证身份」是不同的表述，前者是雇主明确自身成本边界，目前不被 EEOC 明确定性为歧视。</p>
+<p><strong>H-1B 中介公司推荐工作，我可以信任吗？</strong> 需谨慎评估。SibiTalent 案表明，部分 IT 人力外包公司存在系统性合规问题。选择中介时，优先核查其是否有正规雇主担保记录、有无 EEOC 投诉历史。</p>
+<p><strong>我的 H-1B 雇主被 EEOC 起诉，会影响我的签证状态吗？</strong> 诉讼本身不会自动导致 H-1B 失效，但若雇主因违规关闭或被吊销雇主资质，你的签证将失去依附，需尽快找到新担保雇主并提交 transfer 申请。建议及时咨询移民律师。</p>
+<p><strong>留学生怎样找工作才能绕开签证偏见？</strong> 内推是最有效的方式。直接通过在职校友或 Hiring Manager 推荐，可以在雇主做出正式签证评估之前，先让你的能力被看见。</p>
+<p>---</p>
+<p>如果你正处于 OPT 求职期、担心签证身份影响机会，或想了解如何通过内推绕过中介直达名企 Hiring Manager，欢迎添加 Rexpand 企业微信，获得 <strong>1v1 免费 30 分钟求职咨询</strong>，我们的导师来自 Goldman Sachs、Google、Amazon、Meta 等 200+ 名企，平均 5 年以上在职经验，30 分钟内回复。</p>
+        <section style="margin:48px 0 8px;padding:24px 26px;border:1px solid #d7e8dc;border-radius:12px;background:#f0fdf4;">
+  <p style="font-size:20px;font-weight:700;line-height:1.35;color:#0a0a0a;margin:0 0 8px;">不确定自己的求职路怎么走?</p>
+  <p style="font-size:14px;line-height:1.7;color:#404040;margin:0 0 18px;">企业微信 1v1 免费咨询 · 30 分钟内回复。点击下方链接或微信扫码,直接添加 Rexpand 求职顾问。</p>
+  <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+    <a href="https://work.weixin.qq.com/ca/cawcde33679f282bca" target="_blank" rel="noopener" style="display:inline-block;background:#1FA940;color:#fff;font-size:15px;font-weight:600;padding:13px 28px;border-radius:8px;text-decoration:none;">立即免费咨询 →</a>
+    <img src="https://wandover.com/assets/rexpand-consult-qr.png" alt="扫码添加 Rexpand 求职顾问" style="width:128px;height:128px;display:block;border:1px solid #e5e5e5;border-radius:8px;">
+  </div>
+</section>
+      `,
+      keywords: ['H-1B歧视', 'EEOC诉讼', 'Only H-1B招聘', '留学生求职', 'H-1B签证', '国籍歧视', 'OPT求职', '工作签证'],
+      sources: [
+        { title: 'news.google.com', host: 'news.google.com', url: 'https://news.google.com/rss/articles/CBMirgFBVV95cUxQRmd1NnJicHgyNUtYUWhqeGczMDVWZG4yemxDZWctMUVVdHBlRVAxMmk5YjAxYlZUeFBnNVpYUi1RYzMyOTgzYzVDMHJBY2tKOUtvY1R0SVlsb1d4RUI1azF3bXNKR1JMcGpjTnk4Q0pDeHByYkRqLWs5bHZGWkFpak1SQ3pyNk1ES3BSb2FkVk5NQWdiMV9YUzF6OHBvRS1fMm9rbzZOeXhjRmUwQkE?oc=5' }
+      ],
+    },
+
   {
     "slug": "dhs-opt-70000-m2288",
     "category": "H1B & 签证",
