@@ -70,7 +70,13 @@ def outside_article_data(html: str) -> str:
     return html
 
 
-def check(root: Path, live_url: str | None, pages_dir: Path | None = None, article_only: bool = False) -> list[str]:
+def check(
+    root: Path,
+    live_url: str | None,
+    pages_dir: Path | None = None,
+    article_only: bool = False,
+    approved_deletions: set[str] | None = None,
+) -> list[str]:
     errors: list[str] = []
     files = {name: root / name for name in ("index.html", "production-index.html", "production-offer.html")}
     for name, path in files.items():
@@ -128,9 +134,13 @@ def check(root: Path, live_url: str | None, pages_dir: Path | None = None, artic
             with urllib.request.urlopen(request, timeout=30) as response:
                 live_html = response.read().decode("utf-8")
             missing = article_slugs(live_html) - local_slugs
-            if missing:
-                preview = ", ".join(sorted(missing)[:8])
-                errors.append(f"本地缺少线上已有的 {len(missing)} 篇文章：{preview}；先合并线上内容")
+            approved = approved_deletions or set()
+            unexpected = missing - approved
+            if unexpected:
+                preview = ", ".join(sorted(unexpected)[:8])
+                errors.append(f"本地缺少线上已有的 {len(unexpected)} 篇文章：{preview}；先合并线上内容")
+            if approved - missing:
+                errors.append("批准删除清单与当前线上文章不一致；重新核对已删除文章")
             if article_only:
                 if outside_article_data(index) != outside_article_data(live_html):
                     errors.append("文章发布会修改文章和图片库之外的页面内容；先合并最新官网代码")
@@ -151,6 +161,7 @@ def main() -> int:
     parser.add_argument("--root", type=Path, default=ROOT, help="网站目录，默认脚本上级目录")
     parser.add_argument("--pages-dir", type=Path, help="可选：检查准备上传的全部 HTML 子页与首页主体一致")
     parser.add_argument("--article-only", action="store_true", help="文章专用发布：除文章和新增图片外，必须与当前官网完全一致")
+    parser.add_argument("--allow-live-deletions-file", type=Path, help="经后台确认的文章删除清单，每行一个 slug；仅供本次删除发布")
     parser.add_argument(
         "--live",
         nargs="?",
@@ -158,7 +169,18 @@ def main() -> int:
         help="同时核对线上已有文章；不填网址时检查官网首页",
     )
     args = parser.parse_args()
-    errors = check(args.root, args.live, args.pages_dir, args.article_only)
+    approved_deletions = None
+    if args.allow_live_deletions_file:
+        if not args.live:
+            parser.error("--allow-live-deletions-file 必须与 --live 一起使用")
+        try:
+            approved_deletions = {
+                line.strip() for line in args.allow_live_deletions_file.read_text(encoding="utf-8").splitlines()
+                if line.strip() and not line.lstrip().startswith("#")
+            }
+        except OSError as exc:
+            parser.error(f"无法读取批准删除清单：{exc}")
+    errors = check(args.root, args.live, args.pages_dir, args.article_only, approved_deletions)
     if errors:
         for error in errors:
             print("BLOCK:", error, file=sys.stderr)

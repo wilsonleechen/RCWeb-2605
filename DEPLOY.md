@@ -27,6 +27,9 @@ python3 scripts/check_site_release.py --live --article-only
 此模式要求文章和图片库之外的整站代码与线上完全一致，已有文章和图片库内容也不能被删改。
 文章发布者应先从最新 `main` 拉取代码，再插入文章、同步发布快照并执行检查；
 如果其他人刚修改了官网，先合并该修改，不能从旧 `index.html` 直接生成或上传整站。
+后台已确认删除文章时，先保存本次删除的 slug 清单（每行一个），再运行
+`python3 scripts/check_site_release.py --live --allow-live-deletions-file /path/to/deleted-slugs.txt`。
+脚本只允许清单中的线上文章被移除；部署后恢复使用普通的 `--live` 检查。
 若套餐内容经过确认后再次调整，应与页面修改一起更新检查脚本中的对应规则。
 如果本次准备上传一批独立的 `.html` 子页，还要对**本次生成的发布目录**运行
 `python3 scripts/check_site_release.py --live --pages-dir /path/to/generated-pages`；
