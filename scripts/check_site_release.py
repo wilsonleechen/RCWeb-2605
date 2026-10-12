@@ -21,8 +21,8 @@ ARTICLE_END = "// @data:articles:end"
 IMG_START = "  const IMG = {"
 IMG_END = "  const mkImg ="
 REQUIRED = {
-    "SSAR 服务介绍": "SSAR · 钻石计划核心服务",
-    "SSAR 内推路径": '<span>匹配岗位</span><b aria-hidden="true">→</b><span>Hiring Team</span>',
+    "SSAR 服务介绍": "SSAR · 核心求职服务",
+    "SSAR 内推路径": '从岗位找到 Hiring Team',
     "40 次辅导": '<span class="num">40<small>次</small></span>',
     "五行等高": "grid-template-rows: auto repeat(5, 96px)",
     "铂金计划内推投递": (

@@ -6417,93 +6417,134 @@ footer{
     font-size: clamp(44px, 5.2vw, 72px);
     line-height: 1.12;
   }
-  #page-offer .ssar-lead{ max-width: 480px; margin-bottom: 30px; }
-  #page-offer .ssar-tags{ display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 34px; }
-  #page-offer .ssar-tags span{
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 8px 12px;
-    color: var(--ink-2);
-    font-size: 12px;
-    white-space: nowrap;
-  }
+  #page-offer .ssar-lead{ max-width: 450px; margin-bottom: 36px; }
   #page-offer .ssar-card{
     border: 1px solid var(--ink);
     background: #fff;
-    padding: 26px 30px 20px;
+    padding: 24px 28px 20px;
     position: relative;
     border-radius: 4px;
     box-shadow: 16px 16px 0 0 var(--green-soft);
   }
-  #page-offer .ssar-card::before{
-    content: "SSAR · SERVICE FLOW";
-    position: absolute;
-    top: -10px; left: 24px;
-    background: #fff;
-    padding: 0 10px;
+  #page-offer .ssar-visual-head{
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    padding-bottom: 18px; border-bottom: 1px solid var(--line);
     font-family: var(--mono);
     font-size: 10px;
-    letter-spacing: 0.16em;
-    color: var(--ink-4);
+    letter-spacing: .12em;
+    color: var(--ink-3);
   }
-  #page-offer .ssar-step{
+  #page-offer .ssar-live{ display: inline-flex; align-items: center; gap: 7px; color: var(--green-dark); white-space: nowrap; }
+  #page-offer .ssar-live i{
+    width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+    box-shadow: 0 0 0 4px var(--green-soft);
+    animation: ssarPulse 2.4s ease-in-out infinite;
+  }
+  #page-offer .ssar-stage{
     display: grid;
-    grid-template-columns: 44px minmax(0, 1fr);
-    gap: 16px;
-    padding: 19px 0;
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 18px;
+    padding: 22px 0;
     border-bottom: 1px solid var(--line);
   }
-  #page-offer .ssar-step:last-child{ border-bottom: 0; padding-bottom: 0; }
-  #page-offer .ssar-step-code{
+  #page-offer .ssar-stage:last-child{ border-bottom: 0; padding-bottom: 0; }
+  #page-offer .ssar-stage-code{
+    display: block;
     font-family: var(--serif-en);
-    font-size: 30px;
+    font-size: 33px;
     font-style: italic;
     color: var(--green-dark);
     line-height: 1;
+    margin-bottom: 7px;
   }
-  #page-offer .ssar-step-title{
+  #page-offer .ssar-stage-label small{
+    display: block; font-family: var(--mono); font-size: 9px;
+    line-height: 1.35; letter-spacing: .06em; color: var(--ink-4);
+  }
+  #page-offer .ssar-stage-title{
     font-family: var(--serif-cn);
-    font-size: 18px;
+    font-size: 17px;
     color: var(--ink);
-    margin-bottom: 6px;
+    margin-bottom: 11px;
   }
-  #page-offer .ssar-step-title small{
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--ink-4);
-    letter-spacing: .08em;
-    margin-left: 8px;
+  #page-offer .ssar-search-fields{
+    display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
+    color: var(--ink-4); font-family: var(--mono); font-size: 10px;
   }
-  #page-offer .ssar-step-copy{
-    font-size: 13px;
-    line-height: 1.55;
-    color: var(--ink-3);
+  #page-offer .ssar-search-fields span{
+    padding: 5px 9px; border: 1px solid var(--line); border-radius: 3px;
+    color: var(--ink-2); background: #fafbfa;
   }
-  #page-offer .ssar-path{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
-    margin-top: 10px;
-    font-size: 11px;
-    color: var(--green-dark);
+  #page-offer .ssar-search-result{
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    margin-top: 10px; padding: 9px 11px; border: 1px solid #c7dfcb;
+    background: #f4faf5; border-radius: 3px; font-size: 11px; color: var(--ink-2);
+    position: relative; overflow: hidden;
   }
-  #page-offer .ssar-path span{
-    border: 1px solid #c7dfcb;
-    background: #f4faf5;
-    border-radius: 3px;
-    padding: 5px 7px;
-    white-space: nowrap;
+  #page-offer .ssar-search-result::after{
+    content: ""; position: absolute; inset: 0; width: 28%;
+    background: linear-gradient(90deg, transparent, rgba(55,177,82,.15), transparent);
+    animation: ssarScan 4s linear infinite;
   }
-  #page-offer .ssar-path b{ font-weight: 400; color: var(--ink-4); }
-  #page-offer .ssar-step-r .ssar-step-code{ color: var(--ink); }
-  #page-offer .ssar-step-r .ssar-step-title{ color: var(--green-dark); }
+  #page-offer .ssar-search-result strong{ color: var(--green-dark); font-family: var(--mono); font-size: 11px; white-space: nowrap; }
+  #page-offer .ssar-apply-flow, #page-offer .ssar-referral-flow{
+    display: flex; align-items: center; gap: 10px;
+  }
+  #page-offer .ssar-flow-node{
+    border: 1px solid var(--line); border-radius: 3px;
+    padding: 9px 10px; font-size: 11px; white-space: nowrap;
+    color: var(--ink-2); background: #fff;
+  }
+  #page-offer .ssar-flow-node.is-done{
+    border-color: #c7dfcb; color: var(--green-dark); background: #f4faf5;
+  }
+  #page-offer .ssar-flow-line{
+    height: 1px; background: #c7dfcb; flex: 1; min-width: 16px;
+    position: relative;
+  }
+  #page-offer .ssar-flow-line::after{
+    content: ""; position: absolute; left: 0; top: -3px;
+    width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+    animation: ssarTravel 3s ease-in-out infinite;
+  }
+  #page-offer .ssar-stage-note{
+    margin-top: 9px; font-family: var(--mono); font-size: 10px;
+    letter-spacing: .03em; color: var(--ink-4);
+  }
+  #page-offer .ssar-team-node{
+    display: flex; align-items: center; gap: 7px;
+    border: 1px solid #c7dfcb; background: #f4faf5; border-radius: 3px;
+    padding: 6px 9px; color: var(--green-dark); font-size: 11px; white-space: nowrap;
+  }
+  #page-offer .ssar-team-avatars{ display: flex; padding-left: 5px; }
+  #page-offer .ssar-team-avatars i{
+    display: block; width: 20px; height: 20px; margin-left: -5px;
+    border: 2px solid #f4faf5; border-radius: 50%; background: #a9d7b2;
+  }
+  #page-offer .ssar-team-avatars i:nth-child(2){ background: #75bd87; }
+  #page-offer .ssar-team-avatars i:nth-child(3){ background: #378e50; }
+  #page-offer .ssar-followup{
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+    margin-top: 10px; font-family: var(--mono); font-size: 10px; color: var(--ink-3);
+  }
+  #page-offer .ssar-followup span{ border: 1px solid var(--line); border-radius: 999px; padding: 5px 8px; }
+  #page-offer .ssar-followup b{ font-weight: 400; color: var(--green-dark); }
+  @keyframes ssarPulse{ 50%{ box-shadow: 0 0 0 7px rgba(55,177,82,.08); } }
+  @keyframes ssarScan{ from{ transform: translateX(-120%); } to{ transform: translateX(420%); } }
+  @keyframes ssarTravel{ from{ left: 0; } to{ left: calc(100% - 7px); } }
+  @media (prefers-reduced-motion: reduce){
+    #page-offer .ssar-live i, #page-offer .ssar-search-result::after, #page-offer .ssar-flow-line::after{ animation: none; }
+  }
   @media (max-width: 600px){
     #page-offer .guarantee-grid{ padding-left: 20px !important; padding-right: 20px !important; gap: 32px; }
     #page-offer .ssar-title{ font-size: clamp(40px, 10vw, 54px); }
-    #page-offer .ssar-card{ padding: 20px 18px 16px; box-shadow: 8px 8px 0 0 var(--green-soft); }
-    #page-offer .ssar-step{ grid-template-columns: 36px minmax(0, 1fr); gap: 10px; }
-    #page-offer .ssar-step-code{ font-size: 25px; }
+    #page-offer .ssar-card{ padding: 18px 16px 14px; box-shadow: 8px 8px 0 0 var(--green-soft); }
+    #page-offer .ssar-stage{ grid-template-columns: 48px minmax(0, 1fr); gap: 10px; padding: 18px 0; }
+    #page-offer .ssar-stage-code{ font-size: 26px; }
+    #page-offer .ssar-stage-label small{ font-size: 8px; overflow-wrap: anywhere; }
+    #page-offer .ssar-apply-flow, #page-offer .ssar-referral-flow{ gap: 5px; }
+    #page-offer .ssar-flow-node, #page-offer .ssar-team-node{ padding: 7px 6px; font-size: 10px; }
+    #page-offer .ssar-team-avatars i{ width: 16px; height: 16px; }
   }
 
   /* SERVICE MAP — overview blueprint */
@@ -13947,44 +13988,44 @@ footer{
   <section class="hero-guarantee">
     <div class="guarantee-grid" style="max-width:1280px; margin:0 auto; padding-left:40px; padding-right:40px;">
       <div>
-        <div class="eyebrow"><span class="dot"></span>SSAR · 钻石计划核心服务</div>
+        <div class="eyebrow"><span class="dot"></span>SSAR · 核心求职服务</div>
         <h1 class="page-title ssar-title">
-          从合适岗位，<br>
-          <span class="accent">走向招聘团队.</span>
+          找对岗位，<br>
+          <span class="accent">连接招聘团队.</span>
         </h1>
         <p class="page-lead ssar-lead">
-          AI 找到更匹配的职位，团队及时投递，再持续联系对应岗位的 Hiring Team。
+          搜索、投递、内推持续运转。机会出现时，我们已经在行动。
         </p>
-        <div class="ssar-tags" aria-label="SSAR 服务环节"><span>智能搜索</span><span>每日投递</span><span>持续触达</span></div>
         <div class="page-cta">
           <a class="btn-primary" href="#service-map">查看服务全貌 <span class="arr">→</span></a>
           <a class="btn-ghost" href="https://work.weixin.qq.com/ca/cawcde59d081df809d" target="_blank" rel="noopener">立即咨询</a>
         </div>
       </div>
 
-      <div class="ssar-card" aria-label="SSAR 服务三步流程">
-        <div class="ssar-step">
-          <div class="ssar-step-code">SS</div>
-          <div>
-            <div class="ssar-step-title">智能搜索 <small>SMART SEARCH</small></div>
-            <div class="ssar-step-copy">背景 × 职能 × 地区，多轮搜索并筛读岗位描述，找到更匹配的机会。</div>
+      <div class="ssar-card" aria-label="SSAR 从智能搜索到投递与内推的服务流程">
+        <div class="ssar-visual-head"><span>SSAR / CAREER ENGINE</span><span class="ssar-live"><i aria-hidden="true"></i>24 / 7 ACTIVE</span></div>
+        <div class="ssar-stage">
+          <div class="ssar-stage-label"><span class="ssar-stage-code">SS</span><small>SMART<br>SEARCH</small></div>
+          <div class="ssar-stage-main">
+            <div class="ssar-stage-title">多轮搜索，找对岗位</div>
+            <div class="ssar-search-fields"><span>你的背景</span>×<span>目标职能</span>×<span>地区</span></div>
+            <div class="ssar-search-result"><span>JD 筛读完成 · 匹配岗位</span><strong>HIGH FIT</strong></div>
           </div>
         </div>
-        <div class="ssar-step">
-          <div class="ssar-step-code">A</div>
-          <div>
-            <div class="ssar-step-title">团队投递 <small>APPLICATION</small></div>
-            <div class="ssar-step-copy">服务期内每天投递；新发布岗位在 24 小时内完成申请。</div>
+        <div class="ssar-stage">
+          <div class="ssar-stage-label"><span class="ssar-stage-code">A</span><small>APPLI-<br>CATION</small></div>
+          <div class="ssar-stage-main">
+            <div class="ssar-stage-title">新岗位，每天及时投</div>
+            <div class="ssar-apply-flow"><span class="ssar-flow-node">岗位发布</span><span class="ssar-flow-line" aria-hidden="true"></span><span class="ssar-flow-node is-done">申请完成 ✓</span></div>
+            <div class="ssar-stage-note">服务期内每日投递 · 发布后 ≤ 24 小时</div>
           </div>
         </div>
-        <div class="ssar-step ssar-step-r">
-          <div class="ssar-step-code">R</div>
-          <div>
-            <div class="ssar-step-title">智能内推 <small>REFERRAL</small></div>
-            <div class="ssar-step-copy">AI 通过你的 LinkedIn 账户，全天候联系并跟进对应岗位的招聘团队，争取内推机会。</div>
-            <div class="ssar-path" aria-label="从匹配岗位找到招聘团队，再沟通跟进并争取内推机会">
-              <span>匹配岗位</span><b aria-hidden="true">→</b><span>Hiring Team</span><b aria-hidden="true">→</b><span>沟通跟进</span><b aria-hidden="true">→</b><span>内推机会</span>
-            </div>
+        <div class="ssar-stage">
+          <div class="ssar-stage-label"><span class="ssar-stage-code">R</span><small>REFERRAL</small></div>
+          <div class="ssar-stage-main">
+            <div class="ssar-stage-title">从岗位找到 Hiring Team</div>
+            <div class="ssar-referral-flow"><span class="ssar-flow-node">匹配岗位</span><span class="ssar-flow-line" aria-hidden="true"></span><span class="ssar-team-node"><span class="ssar-team-avatars" aria-hidden="true"><i></i><i></i><i></i></span>Hiring Team</span></div>
+            <div class="ssar-followup"><span>LinkedIn 自动沟通</span><b>→</b><span>24×7 跟进</span><b>→</b><span>争取内推</span></div>
           </div>
         </div>
       </div>
