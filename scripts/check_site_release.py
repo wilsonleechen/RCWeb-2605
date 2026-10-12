@@ -18,6 +18,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ARTICLE_START = "  const ARTICLES = ["
 ARTICLE_END = "// @data:articles:end"
+IMG_START = "  const IMG = {"
+IMG_END = "  const mkImg ="
 REQUIRED = {
     "40 次辅导": '<span class="num">40<small>次</small></span>',
     "五行等高": "grid-template-rows: auto repeat(5, 96px)",
@@ -46,10 +48,29 @@ def article_slugs(html: str) -> set[str]:
     end = html.find(ARTICLE_END, start)
     if end < 0:
         raise ValueError("找不到 ARTICLES 结束标记")
-    return set(re.findall(r"\bslug:\s*'([^']+)'", html[start:end]))
+    return set(re.findall(r"[\"']?slug[\"']?\s*:\s*[\"']([^\"']+)[\"']", html[start:end]))
 
 
-def check(root: Path, live_url: str | None, pages_dir: Path | None = None) -> list[str]:
+def section(html: str, start_marker: str, end_marker: str) -> str:
+    start = html.find(start_marker)
+    end = html.find(end_marker, start + len(start_marker)) if start >= 0 else -1
+    if start < 0 or end < 0:
+        raise ValueError(f"找不到页面数据区段：{start_marker}")
+    return html[start + len(start_marker) : end]
+
+
+def outside_article_data(html: str) -> str:
+    """Remove only the two regions the article inserter is allowed to edit."""
+    for start_marker, end_marker in ((ARTICLE_START, ARTICLE_END), (IMG_START, IMG_END)):
+        start = html.find(start_marker)
+        end = html.find(end_marker, start + len(start_marker)) if start >= 0 else -1
+        if start < 0 or end < 0:
+            raise ValueError(f"找不到页面数据区段：{start_marker}")
+        html = html[: start + len(start_marker)] + "\n[article data]\n" + html[end:]
+    return html
+
+
+def check(root: Path, live_url: str | None, pages_dir: Path | None = None, article_only: bool = False) -> list[str]:
     errors: list[str] = []
     files = {name: root / name for name in ("index.html", "production-index.html", "production-offer.html")}
     for name, path in files.items():
@@ -98,6 +119,9 @@ def check(root: Path, live_url: str | None, pages_dir: Path | None = None) -> li
         errors.append(str(exc))
         local_slugs = set()
 
+    if article_only and not live_url:
+        errors.append("文章专用发布必须读取当前官网；请加 --live")
+
     if live_url:
         try:
             request = urllib.request.Request(live_url, headers={"User-Agent": "RexpandReleaseCheck/1.0"})
@@ -107,6 +131,15 @@ def check(root: Path, live_url: str | None, pages_dir: Path | None = None) -> li
             if missing:
                 preview = ", ".join(sorted(missing)[:8])
                 errors.append(f"本地缺少线上已有的 {len(missing)} 篇文章：{preview}；先合并线上内容")
+            if article_only:
+                if outside_article_data(index) != outside_article_data(live_html):
+                    errors.append("文章发布会修改文章和图片库之外的页面内容；先合并最新官网代码")
+                for label, start_marker, end_marker in (
+                    ("已有文章", ARTICLE_START, ARTICLE_END),
+                    ("已有图片库", IMG_START, IMG_END),
+                ):
+                    if section(live_html, start_marker, end_marker) not in section(index, start_marker, end_marker):
+                        errors.append(f"文章发布会删除或修改线上{label}；只能在原有数据前插入新内容")
         except (OSError, UnicodeError, ValueError, urllib.error.URLError) as exc:
             errors.append(f"无法核对线上文章，停止发布：{exc}")
 
@@ -117,6 +150,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT, help="网站目录，默认脚本上级目录")
     parser.add_argument("--pages-dir", type=Path, help="可选：检查准备上传的全部 HTML 子页与首页主体一致")
+    parser.add_argument("--article-only", action="store_true", help="文章专用发布：除文章和新增图片外，必须与当前官网完全一致")
     parser.add_argument(
         "--live",
         nargs="?",
@@ -124,7 +158,7 @@ def main() -> int:
         help="同时核对线上已有文章；不填网址时检查官网首页",
     )
     args = parser.parse_args()
-    errors = check(args.root, args.live, args.pages_dir)
+    errors = check(args.root, args.live, args.pages_dir, args.article_only)
     if errors:
         for error in errors:
             print("BLOCK:", error, file=sys.stderr)

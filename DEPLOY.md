@@ -18,6 +18,15 @@ python3 scripts/check_site_release.py --live
 ```
 
 检查失败时不要上传。它会阻止旧发布快照、已删除服务文案的回归，以及遗漏线上新增文章。
+**仅发布 `/resources` 新文章时**，使用更严格的检查：
+
+```bash
+python3 scripts/check_site_release.py --live --article-only
+```
+
+此模式要求文章和图片库之外的整站代码与线上完全一致，已有文章和图片库内容也不能被删改。
+文章发布者应先从最新 `main` 拉取代码，再插入文章、同步发布快照并执行检查；
+如果其他人刚修改了官网，先合并该修改，不能从旧 `index.html` 直接生成或上传整站。
 若套餐内容经过确认后再次调整，应与页面修改一起更新检查脚本中的对应规则。
 如果本次准备上传一批独立的 `.html` 子页，还要对**本次生成的发布目录**运行
 `python3 scripts/check_site_release.py --live --pages-dir /path/to/generated-pages`；
