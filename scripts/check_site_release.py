@@ -22,18 +22,20 @@ IMG_START = "  const IMG = {"
 IMG_END = "  const mkImg ="
 REQUIRED = {
     "SSAR 服务介绍": "SSAR · 核心求职服务",
-    "SSAR 内推路径": '从岗位找到 Hiring Team',
-    "40 次辅导": '<span class="num">40<small>次</small></span>',
-    "五行等高": "grid-template-rows: auto repeat(5, 96px)",
-    "铂金计划内推投递": (
-        '<div class="pkg-cell diamond"><span class="check">✓</span></div>\n'
-        '        <div class="pkg-cell"><span class="check">✓</span></div>'
-    ),
-    "工作经历": "背景提升项目<small>工作经历</small>",
+    "Full Service Map": "FULL SERVICE MAP",
+    "岗位职能搜索服务": "Job Smart Search Service",
+    "岗位投递服务": "Application Service",
+    "Hiring Team 内推服务": "Hiring Team Referral Service",
+    "钻石专属人脉服务": "钻石计划专属",
+    "四档计划": "四种服务计划",
+    "六行等高": "grid-template-rows: auto repeat(6, minmax(96px, auto))",
+    "钻石导师辅导": "40 节",
+    "铂金导师辅导": "15 节",
     "六个背景提升方向": "ALL 6 TRACKS",
     "手机文章表格横向滚动": "#page-article .art-body table{",
 }
-FORBIDDEN = ("按合同退款", "保Offer", "保 Offer", "OUTCOME GUARANTEE")
+
+FORBIDDEN = ("按合同退款", "保Offer", "保 Offer", "OUTCOME GUARANTEE", "黄金计划", "白银计划", "CPT/OPT支持")
 
 
 def body(html: str) -> str:
