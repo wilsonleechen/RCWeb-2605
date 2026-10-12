@@ -1,6 +1,40 @@
 # Rexpand · 部署指南
 
-这个网站是一个 single-page app —— 整个站点就一个 `index.html`，但通过 `history.pushState` 让每一页都有自己的 URL（`/about`、`/cases`、`/offer` 等）。
+> 当前官网 `rexpandcareer.com` / `www.rexpandcareer.com` 由阿里云 OSS 桶
+> `rexpand-official-website` 提供页面文件，经 DCDN 分发。以下 Vercel、Netlify 等配置是
+> 备选平台说明，不是当前官网的发布路径。
+
+## 当前官网发布前检查
+
+`index.html` 是网站内容的主版本。`production-index.html`、`production-offer.html`
+是生成过的发布快照；发布时必须先与最新页面内容同步，不能直接使用旧快照。
+OSS 中每个 `.html` 子页也包含完整页面代码，更新公共文案或样式时要同步这些子页，
+并刷新两个域名对应的 DCDN 缓存。
+
+**上传前必须运行：**
+
+```bash
+python3 scripts/check_site_release.py --live
+```
+
+检查失败时不要上传。它会阻止旧发布快照、已删除服务文案的回归，以及遗漏线上新增文章。
+若套餐内容经过确认后再次调整，应与页面修改一起更新检查脚本中的对应规则。
+如果本次准备上传一批独立的 `.html` 子页，还要对**本次生成的发布目录**运行
+`python3 scripts/check_site_release.py --live --pages-dir /path/to/generated-pages`；
+脚本会检查每个完整子页的页面主体是否与最新 `index.html` 一致。
+这道检查只有在所有发布流程都执行它时才有效：官网应只保留一个拥有
+`rexpand-official-website` 写入权限的发布身份，找出并停用旧发布任务，
+再收回其他 RAM 用户或 AccessKey 的 `oss:PutObject` 权限。OSS 版本控制可用于恢复历史版本，
+但不能阻止有写入权限的旧任务覆盖当前页面。
+
+Git 远端 `main` 若仍是旧版，也不能作为发布源。每次发布后应把本次使用的
+`index.html`、发布检查脚本和相关内容同步到真正的发布仓库；文章生成任务应基于
+最新页面添加文章，不能从旧页面快照重新生成整个网站。
+
+发布前至少核对首页与 `/offer` 的页面内容、套餐表和新文章；发布后再读取线上页面核对。
+2026-10-12 曾有一次发布使用较早的页面快照，导致新版套餐和移动端修改被覆盖。
+
+网站主体是一个 single-page app，`index.html` 包含页面结构和路由逻辑；浏览器通过 `history.pushState` 显示 `/about`、`/cases`、`/offer` 等页面。当前 OSS 还保存了带各自 SEO 元数据的完整 `.html` 子页副本。
 
 部署的关键：**服务器要把所有未知路径都重写到 `/index.html`**。JS router 会读 `location.pathname` 并显示对应页面。
 
@@ -8,7 +42,7 @@
 
 ## 1. 静态文件清单
 
-部署时上传整个目录，但只有这些是真正需要的：
+若迁移到支持 SPA fallback 的平台，基础文件包括：
 
 ```
 index.html              ← 主入口（包含所有页面 + JS router + SEO meta）
