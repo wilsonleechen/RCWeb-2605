@@ -4,6 +4,13 @@
 > `rexpand-official-website` 提供页面文件，经 DCDN 分发。以下 Vercel、Netlify 等配置是
 > 备选平台说明，不是当前官网的发布路径。
 
+**实际自动发布仓库是 [`expand-app/RCWeb-2605v2`](https://github.com/expand-app/RCWeb-2605v2) 的 `main`。**
+其中 `.github/workflows/deploy.yml` 在每次推送后把整站重新上传至 OSS。内容后台
+`rexpand-webadmin.pages.dev` 的 Worker 也把文章等修改提交到这个仓库的 `main`，因此
+一次文章保存也会触发整站部署。当前工作目录的 `origin` 指向
+`wilsonleechen/RCWeb-2605`，只更新它**不会**更新官网；任何页面修改都必须同步到
+实际自动发布仓库。该仓库的 `scripts/check_site_baseline.py` 会在上传前拒绝旧版页面。
+
 ## 当前官网发布前检查
 
 `index.html` 是网站内容的主版本。`production-index.html`、`production-offer.html`
